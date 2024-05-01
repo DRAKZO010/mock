@@ -82,7 +82,7 @@
 <body>
   <div class="container">
     <h1>Welcome to Mock Test Platform</h1>
-    <p>Select your preferred exam and take your mock test.</p>
+    <p>Select your target exam and take your mock test.</p>
 
     <div class="selection-block">
       <label for="category">Choose Category:</label>
@@ -91,6 +91,9 @@
         <option value="engineering">Engineering</option>
         <option value="medical">Medical</option>
         <option value="law">Law</option>
+        <option value="civil-service">Civil Service</option>
+        <option value="banking">Banking</option>
+        <option value="defense-services">Defense Services</option> <!-- Added option for Defense Services -->
       </select>
     </div>
 
@@ -120,7 +123,7 @@
       examOptions.innerHTML = '<option value="">Select Exam</option>';
 
       if (selectedCategory === 'engineering') {
-        const engineeringExams = ['JEE Main', 'JEE Advanced', 'BITSAT', 'VITEEE', 'WBJEE'];
+        const engineeringExams = ['JEE Main', 'JEE Advanced', 'BITSAT', 'VITEEE', 'WBJEE', 'GATE'];
         populateExams(engineeringExams);
       } else if (selectedCategory === 'medical') {
         const medicalExams = ['NEET', 'AIIMS', 'JIPMER', 'AMU MBBS/BDS', 'COMEDK UGET'];
@@ -128,6 +131,15 @@
       } else if (selectedCategory === 'law') {
         const lawExams = ['CLAT', 'AILET', 'LSAT', 'DU LLB', 'TS LAWCET'];
         populateExams(lawExams);
+      } else if (selectedCategory === 'civil-service') { // Corrected condition
+        const civilServiceExams = ['UPSC', 'KPSC'];
+        populateExams(civilServiceExams);
+      } else if (selectedCategory === 'banking') { // Added condition for Banking
+        const bankingExams = ['IBPS PO', 'IBPS CLERK', 'SBI PO', 'SBI CLERK', 'RBI GRADE B OFFICER'];
+        populateExams(bankingExams);
+      } else if (selectedCategory === 'defense-services') { // Added condition for Defense Services
+        const defenseServicesExams = ['NDA', 'NA', 'CDS', 'AFCAT'];
+        populateExams(defenseServicesExams);
       }
 
       examSelect.disabled = false;
