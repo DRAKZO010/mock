@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mock Test Platform</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+      margin: 0;
+      padding: 0;
+      color: #fff; /* Text color stays white for good contrast */
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 600px;
+      margin: 50px auto;
+      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+      border-radius: 10px; /* Rounded corners for the container */
+      padding: 30px; /* Padding for spacing */
+    }
+
+    #test-container {
+      margin-top: 20px;
+    }
+
+    /* New styles for the selection block */
+    .selection-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: none;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 20px;
+      background-color: rgba(0, 0, 0, 0.1); /* Subtle gray background */
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    }
+
+    .selection-block label {
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333; /* Label text color stays black */
+    }
+
+    /* New styles for improved visibility */
+    h1, p {
+      color: #222; /* Text color changed to dark gray for better contrast */
+    }
+
+    /* New styles for the button */
+    #exam-form button {
+      background-color: #2ecc71; /* Green button color */
+      color: #fff; /* White button text color */
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer; /* Change cursor to pointer on hover */
+      transition: background-color 0.2s ease-in-out; /* Add smooth transition effect */
+    }
+
+    #exam-form button:hover {
+      background-color: #27ae60; /* Darker green on hover */
+    }
+
+    /* Additional styles for the mock test title and description */
+    #test-container h2 {
+      color: #222; /* Dark gray for mock test title */
+    }
+
+    #test-container p {
+      color: #555; /* Medium gray for mock test description */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Mock Test Platform</h1>
+    <p>Select your target exam and customize your mock test.</p>
+
+    <div class="selection-block">
+      <label for="category">Choose Category:</label>
+      <select name="category" id="category">
+        <option value="">Select Category</option>
+        <option value="engineering">Engineering</option>
+        <option value="medical">Medical</option>
+        <option value="law">Law</option>
+      </select>
+    </div>
+
+    <div class="selection-block">
+      <label for="exam">Choose your Exam:</label>
+      <select name="exam" id="exam" disabled>
+        <option value="">Select Exam</option>
+      </select>
+    </div>
+
+    <form id="exam-form">
+      <button type="submit">Generate Mock Test</button>
+    </form>
+
+    <div id="test-container" style="display: none;">
+      <h2 id="mock-test-title">Your Mock Test</h2>
+      <p id="mock-test-info">The mock test will be displayed here after selecting an exam.</p>
+    </div>
+  </div>
+  <script>
+    const categorySelect = document.getElementById('category');
+    const examSelect = document.getElementById('exam');
+
+    categorySelect.addEventListener('change', function() {
+      const selectedCategory = categorySelect.value;
+      const examOptions = document.getElementById('exam');
+      examOptions.innerHTML = '<option value="">Select Exam</option>';
+
+      if (selectedCategory === 'engineering') {
+        const engineeringExams = ['JEE Main', 'JEE Advanced', 'BITSAT', 'VITEEE', 'WBJEE'];
+        populateExams(engineeringExams);
+      } else if (selectedCategory === 'medical') {
+        const medicalExams = ['NEET', 'AIIMS', 'JIPMER', 'AMU MBBS/BDS', 'COMEDK UGET'];
+        populateExams(medicalExams);
+      } else if (selectedCategory === 'law') {
+        const lawExams = ['CLAT', 'AILET', 'LSAT', 'DU LLB', 'TS LAWCET'];
+        populateExams(lawExams);
+      }
+
+      examSelect.disabled = false;
+    });
+
+    function populateExams(exams) {
+      const examOptions = document.getElementById('exam');
+      exams.forEach(function(exam) {
+        const option = document.createElement('option');
+        option.textContent = exam;
+        option.value = exam.toLowerCase().replace(/\s+/g, '-');
+        examOptions.appendChild(option);
+      });
+    }
+
+    const examForm = document.getElementById('exam-form');
+    const testContainer = document.getElementById('test-container');
+    const mockTestTitle = document.getElementById('mock-test-title');
+    const mockTestInfo = document.getElementById('mock-test-info');
+
+    examForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const selectedExam = examSelect.value;
+      if (selectedExam) {
+        testContainer.style.display = 'block';
+        mockTestTitle.textContent = `Mock Test for ${selectedExam}`;
+        mockTestInfo.textContent = 'Mock test questions will be displayed here.';
+      } else {
+        alert('Please select an exam.');
+      }
+    });
+  </script>
+</body>
+</html>
