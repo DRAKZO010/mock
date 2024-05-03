@@ -94,7 +94,8 @@
         <option value="civil-service">Civil Service</option>
         <option value="banking">Banking</option>
         <option value="defense-services">Defense Services</option> <!-- Added option for Defense Services -->
-      </select>
+        <option value="architecture">Architecture</option>
+    </select>
     </div>
 
     <div class="selection-block">
@@ -140,6 +141,9 @@
       } else if (selectedCategory === 'defense-services') { // Added condition for Defense Services
         const defenseServicesExams = ['NDA', 'NA', 'CDS', 'AFCAT'];
         populateExams(defenseServicesExams);
+      }else if (selectedCategory === 'architecture') { // Added condition for Defense Services
+        const architectureExams = ['JEE MAIN(paper 2)', 'NATA', 'CEED', 'GATE-AR', 'MAH-AR-CET (MH)', 'UPSEE B.Arch (UP)', 'KEAM', 'SRMJEEE', 'MET', 'VITEEE'];
+        populateExams(architectureExams);
       }
 
       examSelect.disabled = false;
